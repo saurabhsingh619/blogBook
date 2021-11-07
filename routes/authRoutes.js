@@ -1,5 +1,5 @@
 const express = require('express');
-const { register, login, logout, getMe, updateDetails, updateFollow, forgotPassword, resetPassword} = require('../controllers/authController')
+const { register, login, logout, getMe, updateDetails, updateFollow, forgotPassword, resetPassword, updatePassword} = require('../controllers/authController')
 
 const router = express.Router();
 
@@ -13,5 +13,7 @@ router.put('/updatedetails',protect, updateDetails)
 router.put('/updatefollow',protect, updateFollow)
 router.post('/forgotpassword', forgotPassword);
 router.put('/resetPassword/:resettoken', resetPassword);
+router.put('/updatepassword', protect, updatePassword);
+
 
 module.exports = router;

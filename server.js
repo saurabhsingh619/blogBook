@@ -18,9 +18,11 @@ app.use(express.json());
 
 //Route files
 const auth = require('./routes/authRoutes')
+const blog = require('./routes/blogRoutes')
 
 //Mount routers
 app.use('/blogbook/v1/auth',auth);
+app.use('/blogbook/v1/blog',blog);
 
 
 app.use(errorHandler);

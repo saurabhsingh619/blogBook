@@ -104,6 +104,23 @@ exports.updateDetails = asyncHandler(async (req, res, next) => {
     })
 })
 
+//@desc Update user password 
+//@route PUT /blogbook/v1/auth/updatepassword
+//@access private
+exports.updatePassword = asyncHandler(async (req, res, next) => {
+    const user = await User.findById(req.user.id).select('+password');
+
+    //check current password
+    if(!(user.matchPassword(req.body.currentPassword))){
+        return next(new ErrorResponse('Password is incorrect', 401));
+    }
+
+    user.password = req.body.newPassword;
+    await user.save();
+
+    sendTokenResponse(user, 200, res);
+})
+
 //@desc Update follow/unfollow details
 //@route PUT /blogbook/v1/auth/updatefollow
 //@access private
